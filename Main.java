@@ -4,14 +4,16 @@
 /*
 
 @author : B.Sushma Sree
-@version: 3
+@version: 4
 
 */
 
 import java.util.*;
+import java.lang.*;
+
 public class Main 
 {
-   public static void main(String args[])
+   public static void main(String args[]) throws InvalidInputException
    {
 	   System.out.println("Welcome To GUESSING APP ");
 	   GameConfig game=new GameConfig();
@@ -26,7 +28,7 @@ public class Main
 	   {
 		   
 		   System.out.print("Enter Your Guess : ");
-		   int guess=sc.nextInt();
+		   int guess=ValidationService.validateInput(sc.nextLine());
 		   attempts++;
 		   
 		   
@@ -151,4 +153,40 @@ class HintService
 		
 	}
 	
+}
+
+
+class ValidationService
+{
+	public static int validateInput(String input) throws InvalidInputException
+	{
+		try
+		{
+			int val=Integer.parseInt(input);
+			if(val<1 || val>100)
+			{
+				throw new InvalidInputException("Number must be between 1 and 100");
+			}
+			
+			
+			return val;
+		}
+		
+		catch(NumberFormatException e)
+		{
+			throw new InvalidInputException("Invalid inout .Please enter numbers only ..");
+		}
+		
+	}
+	
+	
+	
+}
+
+class InvalidInputException extends Exception 
+{
+    public InvalidInputException(String message) 
+    {
+        super(message);
+    }
 }
