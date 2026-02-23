@@ -4,7 +4,7 @@
 /*
 
 @author : B.Sushma Sree
-@version: 1
+@version: 2
 
 */
 
@@ -16,8 +16,37 @@ public class Main
 	   System.out.println("Welcome To GUESSING APP ");
 	   GameConfig game=new GameConfig();
 	   game.showRules();
+	   
+	   
+	   
+	   Scanner sc = new Scanner(System.in);
+	   int attempts=0;
+	   
+	   while(attempts<game.getMax_Attempts())
+	   {
+		   
+		   System.out.print("Enter Your Guess : ");
+		   int guess=sc.nextInt();
+		   attempts++;
+		   
+		   
+		   
+		   String result=GuessValidator.validateGuess(guess,game.getTargetNumber());
+		   System.out.println(result);
+		   
+		   
+		   
+		   if(" CORRECT ".equals(result))
+		   {
+			   break;
+			   
+		   }
+	   }
    }
 }
+
+
+
 
 
 class GameConfig
@@ -63,4 +92,27 @@ class GameConfig
 		System.out.println("Hints will be provided after wrong gueeses.\n ");
 		
 	}
+}
+
+
+
+
+class GuessValidator
+{
+	
+	public static String validateGuess(int guess,int target)
+	{
+		if(guess==target)
+		{
+			return " CORRECT ";
+		}
+		else if(guess<target)
+		{
+			return " LOW ";
+			
+		}
+		
+		return " HIGH ";
+	}
+	
 }
