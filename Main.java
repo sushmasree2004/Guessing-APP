@@ -4,7 +4,7 @@
 /*
 
 @author : B.Sushma Sree
-@version: 2
+@version: 3
 
 */
 
@@ -41,6 +41,14 @@ public class Main
 			   break;
 			   
 		   }
+		   if(!" CORRECT ".equals(result)) 
+		   {
+               if(attempts <= game.getMax_Hints())
+		       {
+                  System.out.println(HintService.generateHint(game.getTargetNumber(), attempts));
+              }
+           }
+
 	   }
    }
 }
@@ -113,6 +121,34 @@ class GuessValidator
 		}
 		
 		return " HIGH ";
+	}
+	
+}
+
+
+class HintService 
+{
+	
+	public static String generateHint(int target,int hintCount)
+	{
+		if(hintCount==1)
+		{
+			return (target%2==0)? 
+			"Hint : Number is EVEN " : 
+			"Hint : Number is ODD  ";
+			
+		}
+		
+		else if(hintCount==2)
+		{
+			return (target>50) ?
+			"Hint : Number is greater than 50 ":
+			"Hint : Number is 50 or less ";			
+			
+		}
+		
+		return "NO More Hints Available";
+		
 	}
 	
 }
